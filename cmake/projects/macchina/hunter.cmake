@@ -10,9 +10,9 @@ hunter_add_version(
     VERSION
     0.9.0
     URL
-    "https://github.com/Bjoe/macchina.io/archive/4817d23c39108f0987d9c5c76263b6d0c1ff8dcb.zip"
+	"https://github.com/Bjoe/macchina.io/archive/13d3358bfea50d07e4e24a7d3b1dc44571250706.zip"
     SHA1
-    6a7d5c43508ed49c425deb57899fffbd6d11cf61
+	b0ee95f8dcba7f9f962afa14b348a74578f90340
 )
 
 #hunter_cmake_args(

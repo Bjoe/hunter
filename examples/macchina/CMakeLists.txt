@@ -13,20 +13,18 @@ include("../common.cmake")
 
 project(macchina-example-bundle)
 
+hunter_add_package(PocoCpp)
 hunter_add_package(macchina)
 
-#list(APPEND CMAKE_PREFIX_PATH "${MACCHINA_ROOT}/lib/cmake/macchina")
-#find_package(MacchinaOSP)
+list(APPEND CMAKE_PREFIX_PATH "${MACCHINA_ROOT}/lib/cmake/macchina")
+include("${MACCHINA_ROOT}/lib/cmake/macchina/OSP.cmake") # TODO(BJoe) Include into MacchinaOSP
+include("${MACCHINA_ROOT}/lib/cmake/macchina/Web.cmake") # TODO(BJoe) Include into MacchinaOSP
+find_package(Poco REQUIRED Foundation Data Crypto JSON Net NetSSL   Util XML Zip) # TODO(BJoe) Include into MacchinaOSP
 
-
-include("${MACCHINA_ROOT}/lib/cmake/macchina/OSP.cmake")
-include("${MACCHINA_ROOT}/lib/cmake/macchina/Web.cmake")
-include("${MACCHINA_ROOT}/lib/cmake/macchina/MacchinaOSPConfig.cmake")
-
-
+find_package(MacchinaOSP)
 
 add_library(com.example.samples.service SHARED src/ServiceListener.cpp)
 target_include_directories(com.example.samples.service PUBLIC include)
-target_link_libraries(com.example.samples.service Poco::OSP)
+target_link_libraries(com.example.samples.service PUBLIC Poco::OSP)
 
 create_bundle(TARGET com.example.samples.service SPEC_FILE ExampleService.bndlspec)
