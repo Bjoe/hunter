@@ -1,0 +1,76 @@
+cmake_minimum_required(VERSION 3.0)
+
+# If such variables like `CMAKE_CXX_FLAGS` or `CMAKE_CXX_COMPILER` not used by scheme
+# setting `LANGUAGES` to `NONE` will speed-up build a little bit. If you have any problems/glitches
+# use regular `project(Hunter)` command
+project(Hunter LANGUAGES NONE)
+
+include(ExternalProject) # ExternalProject_Add
+
+# some Hunter modules will be used
+list(APPEND CMAKE_MODULE_PATH "@HUNTER_SELF@/cmake/modules")
+
+include(hunter_status_debug)
+include(hunter_assert_not_empty_string)
+
+# print this message if HUNTER_STATUS_DEBUG option is ON
+hunter_status_debug("Scheme: url_sha1_botan")
+
+# Check variables is not empty
+hunter_assert_not_empty_string("@HUNTER_SELF@")
+hunter_assert_not_empty_string("@HUNTER_EP_NAME@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_URL@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_SHA1@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_DOWNLOAD_DIR@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_SOURCE_DIR@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_INSTALL_PREFIX@")
+hunter_assert_not_empty_string("@HUNTER_INSTALL_PREFIX@")
+
+if(NOT BUILD_SHARED_LIBS)
+  list(APPEND config --disable-shared-library)
+endif()
+
+# Build command and options
+set(autotools_build_command "make")
+if(NOT "${PARAM_PARALLEL_JOBS}" STREQUAL "")
+  list(APPEND autotools_build_command "-j" "${PARAM_PARALLEL_JOBS}")
+endif()
+
+ExternalProject_Add(
+    @HUNTER_EP_NAME@ # Name of the external project. Actually not used set for beautify logging messages
+    URL
+    @HUNTER_PACKAGE_URL@ # URL of the package to download
+    URL_HASH
+    SHA1=@HUNTER_PACKAGE_SHA1@ # SHA1 hash
+    DOWNLOAD_DIR
+    "@HUNTER_PACKAGE_DOWNLOAD_DIR@" # Archive destination location
+    SOURCE_DIR
+    "@HUNTER_PACKAGE_SOURCE_DIR@" # Unpack directory
+    INSTALL_DIR
+    "@HUNTER_INSTALL_PREFIX@" # not used actually (see install command)
+    CONFIGURE_COMMAND
+    "./configure.py"
+    "--prefix=@HUNTER_PACKAGE_INSTALL_PREFIX@"
+    ${config}
+    BUILD_COMMAND
+    ${autotools_build_command}
+    BUILD_IN_SOURCE
+    1
+    INSTALL_COMMAND
+    make install
+)
+
+string(COMPARE EQUAL "${DEPENDS_ON_PKGCONFIGS}" "" default_pkgconfig)
+if(NOT default_pkgconfig)
+  set(DEPENDS_ON_PACKAGES ${DEPENDS_ON_PKGCONFIGS})
+endif()
+
+foreach(PKG_CONFIG_MODULE ${PKGCONFIG_EXPORT_TARGETS})
+  # Use:
+  # * DEPENDS_ON_PACKAGES
+  configure_file(
+      "@HUNTER_GLOBAL_SCRIPT_DIR@/pkgconfig-export-targets.cmake.in"
+      "@HUNTER_PACKAGE_INSTALL_PREFIX@/lib/cmake/${PKG_CONFIG_MODULE}/${PKG_CONFIG_MODULE}Config.cmake"
+      @ONLY
+  )
+endforeach()
