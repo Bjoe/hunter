@@ -22,8 +22,6 @@ hunter_cmake_args(
    libtasn1
    CMAKE_ARGS
    PKGCONFIG_EXPORT_TARGETS=libtasn1
-#   DEPENDS_ON_PACKAGES=foo;bar
-#   EXTRA_FLAGS=--enable-bots
 )
 
 hunter_configuration_types(libtasn1 CONFIGURATION_TYPES Release)
@@ -33,6 +31,6 @@ hunter_download(
     PACKAGE_NAME libtasn1
     PACKAGE_INTERNAL_DEPS_ID "1"
      PACKAGE_UNRELOCATABLE_TEXT_FILES
-#     "lib/libfoo.la"
+     "lib/libtasn1.la"
      "lib/pkgconfig/libtasn1.pc"
 )
