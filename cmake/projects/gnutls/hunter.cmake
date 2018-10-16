@@ -5,6 +5,8 @@
 
 include(hunter_add_version)
 include(hunter_cacheable)
+include(hunter_cmake_args)
+include(hunter_configuration_types)
 include(hunter_download)
 include(hunter_pick_scheme)
 
@@ -19,6 +21,19 @@ hunter_add_version(
     51b29b7e37467a765378f3c8e546a5c1bb2a5054
 )
 
+hunter_cmake_args(
+   gnutls
+   CMAKE_ARGS
+   PKGCONFIG_EXPORT_TARGETS=gnutls
+   DEPENDS_ON_PACKAGES=nettle;libtasn1
+   EXTRA_FLAGS=--disable-tests;--disable-doc;--disable-tools;--with-included-unistring;--without-p11-kit
+)
+
+hunter_configuration_types(@PKG@ CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 hunter_cacheable(gnutls)
-hunter_download(PACKAGE_NAME gnutls)
+hunter_download(
+  PACKAGE_NAME gnutls
+  "lib/libgnutls.la"
+  "lib/pkgconfig/gnutls.pc"
+)
