@@ -11,6 +11,8 @@ project(gnults)
 
 # DOCUMENTATION_START {
 hunter_add_package(gnutls)
+hunter_add_package(nettle)
+find_package(nettle CONFIG REQUIRED)
 find_package(gnutls CONFIG REQUIRED)
 
 add_executable(boo boo.cpp)
