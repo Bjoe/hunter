@@ -29,11 +29,13 @@ hunter_cmake_args(
    EXTRA_FLAGS=--disable-tests;--disable-doc;--disable-tools;--with-included-unistring;--without-p11-kit
 )
 
-hunter_configuration_types(@PKG@ CONFIGURATION_TYPES Release)
+hunter_configuration_types(gnutls CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 hunter_cacheable(gnutls)
 hunter_download(
   PACKAGE_NAME gnutls
+  PACKAGE_INTERNAL_DEPS_ID "1"
+  PACKAGE_UNRELOCATABLE_TEXT_FILES
   "lib/libgnutls.la"
   "lib/pkgconfig/gnutls.pc"
 )
