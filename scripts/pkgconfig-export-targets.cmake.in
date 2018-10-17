@@ -10,20 +10,13 @@ include(hunter_pkgconfig_export_target)
 hunter_pkgconfig_export_target("@PKG_CONFIG_MODULE@")
 
 foreach(_hunter_deps @DEPENDS_ON_PACKAGES@)
-  find_package("${_hunter_deps}" CONFIG)
-  string(TOUPPER ${_hunter_deps} HUNTER_DEPS)
-  if(${HUNTER_DEPS}_FOUND)
-    set(LINK_TARGET_DEP "PkgConfig::${_hunter_deps}")
-  else()
-    find_package("${_hunter_deps}" MODULE REQUIRED)
-    set(LINK_TARGET_DEP "${_hunter_deps}::${_hunter_deps}")
-  endif()
+  find_package("${_hunter_deps}" CONFIG REQUIRED)
 
   set_property(
       TARGET
       "PkgConfig::@PKG_CONFIG_MODULE@"
       APPEND
       PROPERTY
-      INTERFACE_LINK_LIBRARIES ${LINK_TARGET_DEP}
+      INTERFACE_LINK_LIBRARIES "PkgConfig::${_hunter_deps}"
   )
 endforeach()
