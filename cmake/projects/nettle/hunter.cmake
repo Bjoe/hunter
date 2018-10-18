@@ -27,7 +27,7 @@ hunter_cmake_args(
 )
 
 hunter_configuration_types(nettle CONFIGURATION_TYPES Release)
-hunter_pick_scheme(DEFAULT url_sha1_autotools)
+hunter_pick_scheme(DEFAULT url_sha1_nettle_autotools)
 hunter_cacheable(nettle)
 hunter_download(
     PACKAGE_NAME nettle
