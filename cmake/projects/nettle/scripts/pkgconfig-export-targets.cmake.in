@@ -1,0 +1,17 @@
+# ----------------------------------------------------------------------
+# Auto creation of CMake targets from pkg-config
+# ----------------------------------------------------------------------
+
+include(hunter_pkgconfig_export_target)
+
+hunter_pkgconfig_export_target("@PKG_CONFIG_MODULE@")
+
+find_package(gmp MODULE REQUIRED)
+
+set_property(
+    TARGET
+    "PkgConfig::@PKG_CONFIG_MODULE@"
+    APPEND
+    PROPERTY
+    INTERFACE_LINK_LIBRARIES "gmp::gmp"
+)
