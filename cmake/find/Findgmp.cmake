@@ -18,11 +18,11 @@
 
 find_path(gmp_INCLUDE_DIR
   NAMES gmp.h
-  PATHS ${FOO_ROOT}/include
+  PATHS ${gmp_ROOT}/include
 )
 find_library(gmp_LIBRARY
   NAMES gmp
-  PATHS ${FOO_ROOT}/lib
+  PATHS ${gmp_ROOT}/lib
 )
 
 #set(gmp_VERSION ${PC_gmp_VERSION})
