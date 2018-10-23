@@ -5,6 +5,7 @@ include(hunter_cacheable)
 include(hunter_download)
 include(hunter_pick_scheme)
 include(hunter_cmake_args)
+include(hunter_configuration_types)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -23,6 +24,7 @@ hunter_cmake_args(
       PKGCONFIG_EXPORT_TARGETS=botan-2
 )
 
+hunter_configuration_types(botan CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_botan)
 hunter_cacheable(botan)
 hunter_download(PACKAGE_NAME botan
