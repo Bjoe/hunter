@@ -5,6 +5,8 @@ cmake_minimum_required(VERSION 3.0)
 # use regular `project(Hunter)` command
 project(Hunter LANGUAGES NONE)
 
+include("@HUNTER_SELF@/cmake/Hunter")
+
 include(ExternalProject) # ExternalProject_Add
 
 # some Hunter modules will be used
@@ -192,6 +194,17 @@ list(APPEND config
 
 if(NOT "${ar}" STREQUAL "")
   list(APPEND config --ar-command=${ar})
+endif()
+
+if(WITH_ZLIB)
+  list(APPEND config --with-zlib)
+  hunter_add_package(ZLIB)
+  list(APPEND DEPENDS_ON_PKGCONFIGS zlib)
+endif()
+
+if(WITH_BZIP2)
+  list(APPEND config --with-bzip2)
+  hunter_add_package(BZip2)
 endif()
 
 ExternalProject_Add(

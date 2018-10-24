@@ -21,6 +21,8 @@ hunter_add_version(
 hunter_cmake_args(
     botan
     CMAKE_ARGS
+      WITH_BZIP2=NO
+      WITH_ZLIB=NO
       PKGCONFIG_EXPORT_TARGETS=botan-2
 )
 
