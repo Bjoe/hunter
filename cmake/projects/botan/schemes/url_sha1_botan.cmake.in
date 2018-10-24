@@ -199,7 +199,6 @@ endif()
 if(WITH_ZLIB)
   list(APPEND config --with-zlib)
   hunter_add_package(ZLIB)
-  list(APPEND DEPENDS_ON_PKGCONFIGS zlib)
 endif()
 
 if(WITH_BZIP2)
