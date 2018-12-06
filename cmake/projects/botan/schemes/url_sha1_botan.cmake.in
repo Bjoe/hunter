@@ -206,6 +206,11 @@ if(WITH_BZIP2)
   hunter_add_package(BZip2)
 endif()
 
+if(ENABLE_MODULES)
+  list(APPEND config --enable-modules=${ENABLE_MODULES})
+endif()
+
+
 ExternalProject_Add(
     @HUNTER_EP_NAME@ # Name of the external project. Actually not used set for beautify logging messages
     URL
