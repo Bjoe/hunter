@@ -183,33 +183,36 @@ hunter_get_build_flags(
 #    --list-os-features              list available OS features and exit
 #
 if(NOT BUILD_SHARED_LIBS)
-  list(APPEND config --disable-shared-library)
+  list(APPEND configure_opts --disable-shared-library)
 endif()
 
-list(APPEND config
+list(APPEND configure_opts
   --cc-bin=${cxx}
   --cxxflags=${cxxflags}
   --ldflags=${ldflags}
 )
 
 if(NOT "${ar}" STREQUAL "")
-  list(APPEND config --ar-command=${ar})
+  list(APPEND configure_opts --ar-command=${ar})
 endif()
 
 if(WITH_ZLIB)
-  list(APPEND config --with-zlib)
+  list(APPEND configure_opts --with-zlib)
   hunter_add_package(ZLIB)
 endif()
 
 if(WITH_BZIP2)
-  list(APPEND config --with-bzip2)
+  list(APPEND configure_opts --with-bzip2)
   hunter_add_package(BZip2)
 endif()
 
 if(ENABLE_MODULES)
-  list(APPEND config --enable-modules=${ENABLE_MODULES})
+  list(APPEND configure_opts --enable-modules=${ENABLE_MODULES})
 endif()
 
+if("@HUNTER_PACKAGE_CONFIGURATION_TYPES@" EQUAL "Debug")
+  list(APPEND configure_opts --with-debug-info --debug-mode)
+endif()
 
 ExternalProject_Add(
     @HUNTER_EP_NAME@ # Name of the external project. Actually not used set for beautify logging messages
@@ -226,7 +229,7 @@ ExternalProject_Add(
     CONFIGURE_COMMAND
     "./configure.py"
     "--prefix=@HUNTER_PACKAGE_INSTALL_PREFIX@"
-    ${config}
+    ${configure_opts}
     BUILD_COMMAND
     ${autotools_build_command}
     BUILD_IN_SOURCE
