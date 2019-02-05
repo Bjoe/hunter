@@ -32,11 +32,6 @@ hunter_assert_not_empty_string("@HUNTER_INSTALL_PREFIX@")
 
 # Build command and options
 
-set(autotools_build_command "make")
-if(NOT "@HUNTER_JOBS_OPTION@" STREQUAL "")
-  list(APPEND autotools_build_command "-j" "@HUNTER_JOBS_OPTION@")
-endif()
-
 hunter_get_toolchain_binaries(
     OUT_AR
       ar
@@ -182,18 +177,12 @@ hunter_get_build_flags(
 #    --list-modules                  list available modules and exit
 #    --list-os-features              list available OS features and exit
 #
-if(NOT BUILD_SHARED_LIBS)
-  list(APPEND configure_opts --disable-shared-library)
+if("@HUNTER_PACKAGE_CONFIGURATION_TYPES@" STREQUAL "Debug")
+  list(APPEND configure_opts --debug-mode --with-sanitizers)
 endif()
 
-list(APPEND configure_opts
-  --cc-bin=${cxx}
-  --cxxflags=${cxxflags}
-  --ldflags=${ldflags}
-)
-
-if(NOT "${ar}" STREQUAL "")
-  list(APPEND configure_opts --ar-command=${ar})
+if(NOT BUILD_SHARED_LIBS)
+  list(APPEND configure_opts --disable-shared-library)
 endif()
 
 if(WITH_ZLIB)
@@ -210,8 +199,20 @@ if(ENABLE_MODULES)
   list(APPEND configure_opts --enable-modules=${ENABLE_MODULES})
 endif()
 
-if("@HUNTER_PACKAGE_CONFIGURATION_TYPES@" EQUAL "Debug")
-  list(APPEND configure_opts --with-debug-info --debug-mode)
+list(APPEND configure_opts
+  --cc-bin=${cxx}
+  --cc-abi-flags=${cxxflags}
+#  --cxxflags=${cxxflags} # TODO Bug in configure.py ?! If we set cxxflags with --cxxflags it overules configure.py build settings, for example for debug mode (--debug-mode) build settings -g ...
+  --ldflags=${ldflags}
+)
+
+if(NOT "${ar}" STREQUAL "")
+  list(APPEND configure_opts --ar-command=${ar})
+endif()
+
+set(autotools_build_command "make")
+if(NOT "@HUNTER_JOBS_OPTION@" STREQUAL "")
+  list(APPEND autotools_build_command "-j" "@HUNTER_JOBS_OPTION@")
 endif()
 
 ExternalProject_Add(
