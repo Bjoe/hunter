@@ -234,6 +234,9 @@ ExternalProject_Add(
     CONFIGURE_COMMAND
     "./configure.py"
     "--prefix=@HUNTER_PACKAGE_INSTALL_PREFIX@"
+    "--with-external-includedir=@HUNTER_INSTALL_PREFIX@/include"
+    "--with-external-libdir=@HUNTER_INSTALL_PREFIX@/lib"
+
     ${configure_opts}
     BUILD_COMMAND
     ${autotools_build_command}

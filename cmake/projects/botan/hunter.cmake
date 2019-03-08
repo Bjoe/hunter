@@ -18,28 +18,6 @@ hunter_add_version(
     80a2e760b4d7346fe667b85143edf022a707072e
 )
 
-hunter_add_version(
-    PACKAGE_NAME
-    botan
-    VERSION
-    2.9.0
-    URL
-    "https://github.com/randombit/botan/archive/2.9.0.zip"
-    SHA1
-    bf476409de3f8d66c5043b94becbab2309de5a61
-)
-
-hunter_add_version(
-    PACKAGE_NAME
-    botan
-    VERSION
-    2.8.0
-    URL
-    "https://github.com/randombit/botan/archive/2.8.0.zip"
-    SHA1
-    d2b828a36dad40b4bf4ccbef594067ca71bfe315
-)
-
 hunter_cmake_args(
     botan
     CMAKE_ARGS
