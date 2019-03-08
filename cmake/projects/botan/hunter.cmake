@@ -11,6 +11,17 @@ hunter_add_version(
     PACKAGE_NAME
     botan
     VERSION
+    2.10.0-RC
+    URL
+    "https://codeload.github.com/randombit/botan/legacy.zip/57042ce13cd0d6bbb79a1885221b488cc214c17a"
+    SHA1
+    80a2e760b4d7346fe667b85143edf022a707072e
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    botan
+    VERSION
     2.9.0
     URL
     "https://github.com/randombit/botan/archive/2.9.0.zip"
