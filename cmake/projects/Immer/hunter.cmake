@@ -9,6 +9,17 @@ hunter_add_version(
     PACKAGE_NAME
     Immer
     VERSION
+    0.6.2-1f66866-p0
+    URL
+    "https://github.com/Bjoe/immer/archive/hunter-0.6.2-1f66866.zip"
+    SHA1
+    e77865f45675f023fe3b6abcd7a407e21cbbb6dd
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    Immer
+    VERSION
     0.6.2-cf44615
     URL
     "https://github.com/arximboldi/immer/archive/cf446157834335887c2f89418e5dad3d00abfb85.zip"
