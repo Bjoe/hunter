@@ -50,7 +50,7 @@ environment:
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
     - TOOLCHAIN: "mingw-cxx17"
-      PROJECT_DIR: examples\Boost-filesystem
+      PROJECT_DIR: examples\Boost-filesystem-1-64
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
     # }
@@ -103,7 +103,7 @@ environment:
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
     - TOOLCHAIN: "mingw-cxx17"
-      PROJECT_DIR: examples\Boost-thread
+      PROJECT_DIR: examples\Boost-thread-1-64
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
     # }
@@ -119,7 +119,7 @@ environment:
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
     - TOOLCHAIN: "mingw-cxx17"
-      PROJECT_DIR: examples\Boost-chrono
+      PROJECT_DIR: examples\Boost-chrono-1-64
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
     # }
