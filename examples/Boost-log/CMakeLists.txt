@@ -3,6 +3,8 @@
 
 cmake_minimum_required(VERSION 3.0)
 
+include(CMakePrintHelpers)
+
 set(Boost_DEBUG ON CACHE BOOLEAN "")
 set(TESTING_CONFIG_OPT FILEPATH ${CMAKE_CURRENT_LIST_DIR}/config.cmake)
 
@@ -14,6 +16,11 @@ project(download-boost)
 
 hunter_add_package(Boost COMPONENTS log)
 find_package(Boost CONFIG REQUIRED log)
+
+cmake_print_properties(
+        TARGETS Boost::log
+        PROPERTIES INTERFACE_LINK_LIBRARIES
+)
 
 add_executable(foo foo.cpp)
 target_link_libraries(foo PUBLIC Boost::log)
