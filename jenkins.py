@@ -101,6 +101,13 @@ def run():
           )
       )
 
+  if (
+      os.getenv('TRAVIS') and
+      (project_dir == 'examples/Boost-filesystem') and
+      (toolchain == 'android-ndk-r10e-api-19-armeabi-v7a-neon')
+  ):
+    verbose = False
+
   project_dir = os.path.join(cdir, project_dir)
   project_dir = os.path.normpath(project_dir)
 
@@ -196,7 +203,7 @@ def run():
 
   args += ['--verbose']
   if not verbose:
-    args += ['--discard', '10']
+    args += ['--discard', '100']
     args += ['--tail', '200']
 
   print('Execute command: [')
