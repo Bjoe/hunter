@@ -6,7 +6,6 @@ cmake_minimum_required(VERSION 3.0)
 include(CMakePrintHelpers)
 
 set(Boost_DEBUG ON CACHE BOOLEAN "")
-set(TESTING_CONFIG_OPT FILEPATH ${CMAKE_CURRENT_LIST_DIR}/config.cmake)
 
 # Emulate HunterGate:
 # * https://github.com/hunter-packages/gate
@@ -23,4 +22,13 @@ cmake_print_properties(
 )
 
 add_executable(foo foo.cpp)
-target_link_libraries(foo PUBLIC Boost::log)
+target_link_libraries(foo PUBLIC Boost::log
+    Boost::filesystem
+    Boost::chrono
+    Boost::thread
+    Boost::regex
+    Boost::date_time
+    Boost::atomic
+    Boost::system
+    Boost::boost
+)
