@@ -25,6 +25,10 @@ environment:
       PROJECT_DIR: examples\Boost
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
 
+    - TOOLCHAIN: "vs-15-2017-win64-cxx17"
+      PROJECT_DIR: examples\Boost-useBoostConfig
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
     - TOOLCHAIN: "vs-14-2015-sdk-8-1"
       PROJECT_DIR: examples\Boost
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -43,6 +47,10 @@ environment:
 
     - TOOLCHAIN: "vs-15-2017-win64-cxx17"
       PROJECT_DIR: examples\Boost-filesystem
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
+    - TOOLCHAIN: "vs-15-2017-win64-cxx17"
+      PROJECT_DIR: examples\Boost-filesystem-useBoostConfig
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
 
     - TOOLCHAIN: "vs-14-2015-sdk-8-1"
@@ -81,6 +89,10 @@ environment:
       PROJECT_DIR: examples\Boost-iostreams
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
 
+    - TOOLCHAIN: "vs-15-2017-win64-cxx17"
+      PROJECT_DIR: examples\Boost-iostreams-useBoostConfig
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
     - TOOLCHAIN: "vs-14-2015-sdk-8-1"
       PROJECT_DIR: examples\Boost-iostreams
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -112,6 +124,10 @@ environment:
 
     - TOOLCHAIN: "vs-15-2017-win64-cxx17"
       PROJECT_DIR: examples\Boost-chrono
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
+    - TOOLCHAIN: "vs-15-2017-win64-cxx17"
+      PROJECT_DIR: examples\Boost-chrono-useBoostConfig
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
 
     - TOOLCHAIN: "vs-14-2015-sdk-8-1"
