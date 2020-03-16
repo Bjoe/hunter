@@ -16,18 +16,18 @@
 #
 #   libbacktrace::libbacktrace   - The libbacktrace library
 
-file(GLOB_RECURSE _OUT LIST_DIRECTORIES true "${libbacktrace_ROOT}/*")
-foreach(_O ${_OUT})
-  message(STATUS "_OUT ${_O}")
-endforeach()
+file(READ "${CMAKE_BINARY_DIR}/_3rdParty/Hunter/install-root-dir" THIRDPARTY_INSTALL_ROOT_DIR)
+file(GLOB_RECURSE THIRD_PARTY_LIBRARIES "${THIRDPARTY_INSTALL_ROOT_DIR}/*")
+string(REPLACE ";" "\n" THIRD_PARTY_LIBRARIES_OUT "${THIRD_PARTY_LIBRARIES}")
+message(STATUS "\n${THIRD_PARTY_LIBRARIES_OUT}\n")
 
 find_path(libbacktrace_INCLUDE_DIR
   NAMES backtrace.h
-  PATHS ${libbacktrace_ROOT}/include
+  PATHS "${libbacktrace_ROOT}/include"
 )
 find_library(libbacktrace_LIBRARY
   NAMES backtrace
-  PATHS ${libbacktrace_ROOT}/lib
+  PATHS "${libbacktrace_ROOT}/lib"
 )
 
 set(libbacktrace_VERSION ${PC_libbacktrace_VERSION})
