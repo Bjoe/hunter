@@ -6,7 +6,7 @@ set(Boost_DEBUG ON CACHE BOOLEAN "")
 # * https://github.com/hunter-packages/gate
 include("../common.cmake")
 
-project(download-boost)
+project(Boost-headers)
 
 hunter_add_package(Boost)
 find_package(Boost CONFIG REQUIRED)
